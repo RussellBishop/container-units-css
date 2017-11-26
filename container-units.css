@@ -1,25 +1,30 @@
 
 :root {
     /**
-     * Configure your container grid with the next two properties.
      *
-     * --ColumnCount: Number of columns
-     * --ColumnDecimal:;
+     * Set up your container grid with the next two properties:
+     *
+     * --ColumnCount:
+     *
+     *      Number of columns
+     *
+     * --ColumnDecimal:
+     *
+     *      Width of a single grid column as a decimal.
+     *      7% = .07
+     *
+     *      Working from a design?
+     *      ColumnWidth / GridWidth
+     *
      */
     --ColumnCount: 12;
-    --ColumnDecimal: .08;
+    --ColumnDecimal: 0.07;
 
     --GutterCount: calc(var(--ColumnCount) - 1);
-    --GutterRatio: calc((1 - (var(--ColumnCount) * var(--ColumnDecimal))) / var(--GutterCount));
+    --GutterDecimal: calc((1 - (var(--ColumnCount) * var(--ColumnDecimal))) / var(--GutterCount));
 
     --ColumnWidth: calc(var(--ColumnDecimal) * var(--ContainerWidth));
-    --GutterWidth: calc(var(--GutterRatio) * var(--ContainerWidth));
-
-
-/*
-    Full equation:
-    --ColumnSpan:           calc((((var(--ColumnSpanCount) * var(--ColumnDecimal))) + (((var(--ColumnSpanCount) - 1) * var(--GutterWidth)))) * var(--ContainerWidth));
-*/
+    --GutterWidth: calc(var(--GutterDecimal) * var(--ContainerWidth));
 }
 
 /**
@@ -32,7 +37,7 @@
 /**
  * Configure your container as a grid
  */
-[class*='colspan'] {
+[class*='colspan-'] {
     width: calc(var(--ColumnSpan) * var(--ColumnWidth) + ((var(--ColumnSpan) - 1) * var(--GutterWidth)));
 }
 
@@ -88,4 +93,197 @@
     .colspan-12\@tablet {
         --ColumnSpan: 12;
     }
+}
+
+
+
+
+
+
+[class*='gutterspan-'] {
+    width: calc(var(--GutterSpan) * var(--GutterWidth) + ((var(--GutterSpan) - 1) * var(--ColumnWidth)));
+}
+
+.gutterspan-1 {
+    --GutterSpan: 1;
+}
+
+.gutterspan-2 {
+    --GutterSpan: 2;
+}
+
+.gutterspan-3 {
+    --GutterSpan: 3;
+}
+
+.gutterspan-4 {
+    --GutterSpan: 4;
+}
+
+.gutterspan-5 {
+    --GutterSpan: 5;
+}
+
+.gutterspan-6 {
+    --GutterSpan: 6;
+}
+
+.gutterspan-7 {
+    --GutterSpan: 7;
+}
+
+.gutterspan-8 {
+    --GutterSpan: 8;
+}
+
+.gutterspan-9 {
+    --GutterSpan: 9;
+}
+
+.gutterspan-10 {
+    --GutterSpan: 10;
+}
+
+.gutterspan-11 {
+    --GutterSpan: 11;
+}
+
+.gutterspan-12 {
+    --GutterSpan: 12;
+}
+
+
+
+
+
+
+[class*='gutters-'] {
+    width: calc(var(--Gutters) * var(--GutterWidth));
+}
+
+.gutters-1 {
+    --Gutters: 1;
+}
+
+.gutters-2 {
+    --Gutters: 2;
+}
+
+.gutters-3 {
+    --Gutters: 3;
+}
+
+.gutters-4 {
+    --Gutters: 4;
+}
+
+.gutters-5 {
+    --Gutters: 5;
+}
+
+.gutters-6 {
+    --Gutters: 6;
+}
+
+.gutters-7 {
+    --Gutters: 7;
+}
+
+.gutters-8 {
+    --Gutters: 8;
+}
+
+.gutters-9 {
+    --Gutters: 9;
+}
+
+.gutters-10 {
+    --Gutters: 10;
+}
+
+.gutters-11 {
+    --Gutters: 11;
+}
+
+.gutters-12 {
+    --Gutters: 12;
+}
+
+
+
+
+
+
+
+[class*='columns-'] {
+    width: calc(var(--Columns) * var(--ColumnWidth));
+}
+
+.columns-1 {
+    --Columns: 1;
+}
+
+.columns-2 {
+    --Columns: 2;
+}
+
+.columns-3 {
+    --Columns: 3;
+}
+
+.columns-4 {
+    --Columns: 4;
+}
+
+.columns-5 {
+    --Columns: 5;
+}
+
+.columns-6 {
+    --Columns: 6;
+}
+
+.columns-7 {
+    --Columns: 7;
+}
+
+.columns-8 {
+    --Columns: 8;
+}
+
+.columns-9 {
+    --Columns: 9;
+}
+
+.columns-10 {
+    --Columns: 10;
+}
+
+.columns-11 {
+    --Columns: 11;
+}
+
+.columns-12 {
+    --Columns: 12;
+}
+
+
+
+
+
+
+
+
+[class*='mix-'] {
+    width: calc(var(--Columns) * var(--ColumnWidth) + (var(--Gutters) * var(--GutterWidth)));
+}
+
+.mix-4-2 {
+    --Columns: 4;
+    --Gutters: 2;
+}
+
+.mix-5-5 {
+    --Columns: 5;
+    --Gutters: 5;
 }
