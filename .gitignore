@@ -17,3 +17,4 @@ Makefile
 .gitattributes
 .gulprc.example
 package.json
+*.json

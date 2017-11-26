@@ -1,0 +1,91 @@
+
+:root {
+    /**
+     * Configure your container grid with the next two properties.
+     *
+     * --ColumnCount: Number of columns
+     * --ColumnDecimal:;
+     */
+    --ColumnCount: 12;
+    --ColumnDecimal: .08;
+
+    --GutterCount: calc(var(--ColumnCount) - 1);
+    --GutterRatio: calc((1 - (var(--ColumnCount) * var(--ColumnDecimal))) / var(--GutterCount));
+
+    --ColumnWidth: calc(var(--ColumnDecimal) * var(--ContainerWidth));
+    --GutterWidth: calc(var(--GutterRatio) * var(--ContainerWidth));
+
+
+/*
+    Full equation:
+    --ColumnSpan:           calc((((var(--ColumnSpanCount) * var(--ColumnDecimal))) + (((var(--ColumnSpanCount) - 1) * var(--GutterWidth)))) * var(--ContainerWidth));
+*/
+}
+
+/**
+ * Give the container our --ContainerWidth
+ */
+.container {
+    width: var(--ContainerWidth);
+}
+
+/**
+ * Configure your container as a grid
+ */
+[class*='colspan'] {
+    width: calc(var(--ColumnSpan) * var(--ColumnWidth) + ((var(--ColumnSpan) - 1) * var(--GutterWidth)));
+}
+
+.colspan-1 {
+    --ColumnSpan: 1;
+}
+
+.colspan-2 {
+    --ColumnSpan: 2;
+}
+
+.colspan-3 {
+    --ColumnSpan: 3;
+}
+
+.colspan-4 {
+    --ColumnSpan: 4;
+}
+
+.colspan-5 {
+    --ColumnSpan: 5;
+}
+
+.colspan-6 {
+    --ColumnSpan: 6;
+}
+
+.colspan-7 {
+    --ColumnSpan: 7;
+}
+
+.colspan-8 {
+    --ColumnSpan: 8;
+}
+
+.colspan-9 {
+    --ColumnSpan: 9;
+}
+
+.colspan-10 {
+    --ColumnSpan: 10;
+}
+
+.colspan-11 {
+    --ColumnSpan: 11;
+}
+
+.colspan-12 {
+    --ColumnSpan: 12;
+}
+
+@media (min-width: 700px) and (max-width: 960px) {
+    .colspan-12\@tablet {
+        --ColumnSpan: 12;
+    }
+}
