@@ -1,37 +1,65 @@
+/**
+ *
+ *  Set up your container grid with the first two properties:
+ *
+ *  --ColumnCount:
+ *
+ *      Number of columns.
+ *
+ *  --ColumnDecimal:
+ *
+ *      Width of a single grid column as a decimal.
+ *
+ *      60px / 960px = .0625
+ *
+ *      7% = .07
+ *
+ */
 :root {
-    /**
-     *
-     *  Set up your container grid with the next two properties:
-     *
-     *  --ColumnCount:
-     *
-     *      Number of columns
-     *
-     *  --ColumnDecimal:
-     *
-     *      Width of a single grid column as a decimal.
-     *      7% = .07
-     *
-     *      Working from a design?
-     *      ColumnWidth / GridWidth
-     *
-     */
     --ColumnCount: 12;
-    --ColumnDecimal: 0.07;
-
-    --GutterCount: calc(var(--ColumnCount) - 1);
-    --GutterDecimal: calc((1 - (var(--ColumnCount) * var(--ColumnDecimal))) / var(--GutterCount));
-
-    --ColumnWidth: calc(var(--ColumnDecimal) * var(--ContainerWidth));
-    --GutterWidth: calc(var(--GutterDecimal) * var(--ContainerWidth));
-
-    --GuttersWidthCalc: calc(var(--Gutters) * var(--GutterWidth));
-    --ColumnsWidthCalc: calc(var(--Columns) * var(--ColumnWidth));
+    --ColumnDecimal: .07;
 }
 
 /**
  *
- *  Configure your container as a grid
+ *  You don't need to edit any of this - unless you have outside gutters etc.
+ *
+ */
+:root {
+    --GutterCount: calc(var(--ColumnCount) - 1);
+    --GutterDecimal: calc((1 - (var(--ColumnCount) * var(--ColumnDecimal))) / var(--GutterCount));
+
+    --ColumnUnit: calc(var(--ColumnDecimal) * var(--ContainerWidth));
+    --GutterUnit: calc(var(--GutterDecimal) * var(--ContainerWidth));
+}
+
+/**
+ *
+ *  Set your --ContainerWidth.
+ *
+ *  You can use:
+ *  Viewport Units, Pixels, Rems, Calc();
+ *
+ *  No percentages, they are _relative_ to their parent element. You can substitute them for VW.
+ *
+ *  - - - - - - - - - -
+ *
+ *  Update your --ContainerWidth at any breakpoints you need.
+ *
+ *  @media (min-width: 1280px) {
+ *      :root {
+ *          --ContainerWidth: 1200px;
+ *      }
+ *  }
+ *
+ */
+:root {
+    --ContainerWidth: 90vw;
+}
+
+/**
+ *
+ *  Apply your --ContainerWidth.
  *
  */
 .container {
@@ -40,304 +68,112 @@
 
 /**
  *
- *  Span columns, and the gutters inbetween.
+ *  Width: number of columns, plus the gutters in-between.
+ *
+ *  ⌜--------- 4 ---------⌝       ⌜------ 3 ------⌝
+ *  [   ] [   ] [   ] [   ] [   ] [   ] [   ] [   ]
+ *
+ *
+ *  <section class="columnspan columnspan-4 columnspan-8@tablet"> ...
  *
  */
-[class*='columnspan-'] {
-    width: calc(var(--ColumnSpan) * var(--ColumnWidth) + ((var(--ColumnSpan) - 1) * var(--GutterWidth)));
-}
-
-.columnspan-1 {
-    --ColumnSpan: 1;
-}
-
-.columnspan-2 {
-    --ColumnSpan: 2;
-}
-
-.columnspan-3 {
-    --ColumnSpan: 3;
+.columnspan {
+    width: calc(var(--ColumnSpan) * var(--ColumnUnit) + ((var(--ColumnSpan) - 1) * var(--GutterUnit)));
 }
 
 .columnspan-4 {
     --ColumnSpan: 4;
 }
 
-.columnspan-5 {
-    --ColumnSpan: 5;
-}
-
-.columnspan-6 {
-    --ColumnSpan: 6;
-}
-
-.columnspan-7 {
-    --ColumnSpan: 7;
-}
-
-.columnspan-8 {
-    --ColumnSpan: 8;
-}
-
-.columnspan-9 {
-    --ColumnSpan: 9;
-}
-
-.columnspan-10 {
-    --ColumnSpan: 10;
-}
-
-.columnspan-11 {
-    --ColumnSpan: 11;
-}
-
-.columnspan-12 {
-    --ColumnSpan: 12;
-}
-
-@media (min-width: 700px) and (max-width: 960px) {
-    .columnspan-12\@tablet {
-        --ColumnSpan: 12;
+@media (min-width: 768px) and (max-width: 1024px) {
+    .columnspan-8\@tablet {
+        --ColumnSpan: 8;
     }
 }
 
+/**
+ *
+ *  Width: Number of columns, no gutters.
+ *
+ *           ×4
+ *  [×××][×××][×××][×××]
+ *
+ */
+.columns {
+    width: calc(var(--Columns) * var(--ColumnUnit));
+}
 
+.column-4 {
+    --Column: 4;
+}
 
-
+@media (min-width: 768px) and (max-width: 1024px) {
+    .column-8\@tablet {
+        --Column: 8;
+    }
+}
 
 /**
  *
- *  Span gutters, and the columns inbetween.
+ *  Width: number of gutters, plus the columns inbetween.
+ *
+ *       ⌜------- 4 -------⌝
+ *  [   ] [   ] [   ] [   ] [   ]
+ *
+ *  <section class="gutterspan gutterspan-4 gutterspan-8@tablet"> ...
  *
  */
-[class*='gutterspan-'] {
-    width: calc(var(--GutterSpan) * var(--GutterWidth) + ((var(--GutterSpan) - 1) * var(--ColumnWidth)));
-}
-
-.gutterspan-1 {
-    --GutterSpan: 1;
-}
-
-.gutterspan-2 {
-    --GutterSpan: 2;
-}
-
-.gutterspan-3 {
-    --GutterSpan: 3;
+.gutterspan {
+    width: calc(var(--GutterSpan) * var(--GutterUnit) + ((var(--GutterSpan) - 1) * var(--ColumnUnit)));
 }
 
 .gutterspan-4 {
-    --GutterSpan: 4;
+    --GutterSpan: 1;
 }
 
-.gutterspan-5 {
-    --GutterSpan: 5;
+@media (min-width: 768px) and (max-width: 1024px) {
+    .gutterspan-8 {
+        --GutterSpan: 1;
+    }
 }
-
-.gutterspan-6 {
-    --GutterSpan: 6;
-}
-
-.gutterspan-7 {
-    --GutterSpan: 7;
-}
-
-.gutterspan-8 {
-    --GutterSpan: 8;
-}
-
-.gutterspan-9 {
-    --GutterSpan: 9;
-}
-
-.gutterspan-10 {
-    --GutterSpan: 10;
-}
-
-.gutterspan-11 {
-    --GutterSpan: 11;
-}
-
-.gutterspan-12 {
-    --GutterSpan: 12;
-}
-
-
-
-
 
 /**
  *
- *  Gutters only.
+ *  Width: Number of gutters, no columns.
+ *
+ *        ×4
+ *  [   ]××××[   ]
+ *
+ *  <section class="gutters gutters-4 gutters-8@tablet"> ...
  *
  */
-[class*='gutters-'] {
-    width: calc(var(--Gutters) * var(--GutterWidth));
+.gutters {
+    width: calc(var(--Gutters) * var(--GutterUnit));
 }
 
 .gutters-1 {
     --Gutters: 1;
 }
 
-.gutters-2 {
-    --Gutters: 2;
-}
-
-.gutters-3 {
-    --Gutters: 3;
-}
-
-.gutters-4 {
-    --Gutters: 4;
-}
-
-.gutters-5 {
-    --Gutters: 5;
-}
-
-.gutters-6 {
-    --Gutters: 6;
-}
-
-.gutters-7 {
-    --Gutters: 7;
-}
-
-.gutters-8 {
-    --Gutters: 8;
-}
-
-.gutters-9 {
-    --Gutters: 9;
-}
-
-.gutters-10 {
-    --Gutters: 10;
-}
-
-.gutters-11 {
-    --Gutters: 11;
-}
-
-.gutters-12 {
-    --Gutters: 12;
-}
-
-
-
-
-
-
-/**
- *
- *  Columns only.
- *
- */
-[class*='columns-'] {
-    width: calc(var(--Columns) * var(--ColumnWidth));
-}
-
-.columns-1 {
-    --Columns: 1;
-}
-
-.columns-2 {
-    --Columns: 2;
-}
-
-.columns-3 {
-    --Columns: 3;
-}
-
-.columns-4 {
-    --Columns: 4;
-}
-
-.columns-5 {
-    --Columns: 5;
-}
-
-.columns-6 {
-    --Columns: 6;
-}
-
-.columns-7 {
-    --Columns: 7;
-}
-
-.columns-8 {
-    --Columns: 8;
-}
-
-.columns-9 {
-    --Columns: 9;
-}
-
-.columns-10 {
-    --Columns: 10;
-}
-
-.columns-11 {
-    --Columns: 11;
-}
-
-.columns-12 {
-    --Columns: 12;
-}
-
-
-
-
-
-
-
 /**
  *
  *  Mix your own Columns and Gutters.
  *
+ *  <section class="mix mix-4\2 mix-4/2@tablet"> ...
+ *
  */
-[class*='mix-'] {
-    width: calc(var(--Columns) * var(--ColumnWidth) + (var(--Gutters) * var(--GutterWidth)));
+.mix {
+    width: calc(var(--Columns) * var(--ColumnUnit) + (var(--Gutters) * var(--GutterUnit)));
 }
 
-.mix-4-2 {
+.mix-4\/2 {
     --Columns: 4;
     --Gutters: 2;
 }
 
-.mix-5-5 {
-    --Columns: 5;
-    --Gutters: 5;
-}
-
-
-
-.gutterpad-h-2 {
-    padding-left: calc(2 * var(--GutterWidth));
-    padding-right: calc(2 * var(--GutterWidth));
-}
-
-
-
-.showoff {
-    width: calc(8 * var(--ColumnWidth) + (7 * var(--GutterWidth)));
-    min-height: calc(7 * var(--ColumnWidth));
-    padding: calc(4 * var(--GutterWidth)) calc(8 * var(--GutterWidth));
-    left: calc(1 * var(--ColumnWidth) + (2 * var(--GutterWidth)));
-}
-
-.columntop-2 {
-    top: calc(2 * var(--ColumnWidth));
-}
-
-.guttertop-2 {
-    top: calc(2 * var(--GutterWidth));
-}
-
-.columnbottom-2 {
-    bottom: calc(2 * var(--ColumnWidth));
-}
-
-.gutterbottom-2 {
-    bottom: calc(2 * var(--GutterWidth));
+@media (min-width: 768px) and (max-width: 1024px) {
+    .mix-4\/2\@tablet {
+        --Columns: 4;
+        --Gutters: 2;
+    }
 }
