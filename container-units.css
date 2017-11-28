@@ -68,6 +68,7 @@
 
 /**
  *
+ *  Columnspan
  *  Width: number of columns, plus the gutters in-between.
  *
  *  ⌜--------- 4 ---------⌝       ⌜------ 3 ------⌝
@@ -93,6 +94,7 @@
 
 /**
  *
+ *  Columns
  *  Width: Number of columns, no gutters.
  *
  *           ×4
@@ -103,18 +105,19 @@
     width: calc(var(--Columns) * var(--ColumnUnit));
 }
 
-.column-4 {
-    --Column: 4;
+.columns-4 {
+    --Columns: 4;
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-    .column-8\@tablet {
-        --Column: 8;
+    .columns-8-@tablet {
+        --Columns: 8;
     }
 }
 
 /**
  *
+ *  Gutterspan
  *  Width: number of gutters, plus the columns inbetween.
  *
  *       ⌜------- 4 -------⌝
@@ -128,17 +131,18 @@
 }
 
 .gutterspan-4 {
-    --GutterSpan: 1;
+    --GutterSpan: 4;
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-    .gutterspan-8 {
-        --GutterSpan: 1;
+    .gutterspan-8-tablet {
+        --GutterSpan: 8;
     }
 }
 
 /**
  *
+ *  Gutters
  *  Width: Number of gutters, no columns.
  *
  *        ×4
@@ -159,20 +163,20 @@
  *
  *  Mix your own Columns and Gutters.
  *
- *  <section class="mix mix-4\2 mix-4/2@tablet"> ...
+ *  <section class="mix mix-4-2 mix-4-2-tablet"> ...
  *
  */
 .mix {
     width: calc(var(--Columns) * var(--ColumnUnit) + (var(--Gutters) * var(--GutterUnit)));
 }
 
-.mix-4\/2 {
+.mix-4-2 {
     --Columns: 4;
     --Gutters: 2;
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-    .mix-4\/2\@tablet {
+    .mix-4-2-tablet {
         --Columns: 4;
         --Gutters: 2;
     }
