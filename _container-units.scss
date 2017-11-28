@@ -1,0 +1,64 @@
+/**
+ *
+ *  Columnspan
+ *  Number of columns, plus the gutters in-between.
+ *
+ *  width: columnspan(8);
+ *
+ */
+@function columnspan($columnspan) {
+
+  @return calc(#{$columnspan} * var(--ColumnUnit) + ((#{$columnspan - 1}) * var(--GutterUnit)));
+}
+
+/**
+ *
+ *  Columns
+ *  Number of columns, no gutters.
+ *
+ *  right: columns(1);
+ *
+ */
+@function columns($columns) {
+
+  @return calc(#{$columns} * var(--ColumnUnit));
+}
+
+/**
+ *
+ *  Gutterspan
+ *  Number of gutters, plus the columns inbetween.
+ *
+ *  margin-left: gutterspan(4);
+ *
+ */
+@function gutterspan($gutterspan) {
+
+  @return calc(#{$gutterspan} * var(--GutterUnit) + ((#{$gutterspan - 1}) * var(--ColumnUnit)));
+}
+
+/**
+ *
+ *  Gutters
+ *  Number of gutters, no columns.
+ *
+ *  padding-right: gutters(2);
+ *
+ */
+@function gutters($gutters) {
+
+  @return calc(#{$gutters} * var(--GutterUnit));
+}
+
+/**
+ *
+ *  Mix
+ *  Custom numbers for Columns and Gutters.
+ *
+ *  left: mix(5, 1);
+ *
+ */
+@function mix($columns, $gutters) {
+
+  @return calc(#{$columns} * var(--ColumnUnit) + (#{$gutters} * var(--GutterUnit)));
+}
