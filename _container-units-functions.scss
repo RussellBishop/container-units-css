@@ -56,9 +56,10 @@
  *  Custom numbers for Columns and Gutters.
  *
  *  left: mix(5, 1);
+ *  right: mix(3);
  *
  */
-@function mix($columns, $gutters) {
+@function mix($columns, $gutters: $columns) {
 
   @return calc(#{$columns} * var(--ColumnUnit) + (#{$gutters} * var(--GutterUnit)));
 }
