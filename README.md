@@ -29,7 +29,7 @@ Every combination can - and _should_ - be adapted for use with:
 
 ## Next releases:
 
-SCSS functions, e.g. `width: colspan(6)`.
+~~SCSS functions, e.g. `width: colspan(6)`.~~
 
 Utility builders from SCSS maps, e.g. `$colspanUtilites: (2, 4, 6, 9, 12);`
 
